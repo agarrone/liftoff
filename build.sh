@@ -1,6 +1,6 @@
 #/bin/bash
 
-mkdir -p dist/
-mkdir -p dist/page/
-mkdir -p dist/assets/
+mkdir -p docs/
+mkdir -p docs/page/
+mkdir -p docs/assets/
 npx babel-node build.js

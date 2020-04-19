@@ -78,7 +78,7 @@ tableHasPublishedColumn(base, includePublished =>
                 const newUrl = `/assets/${attachment.id}-${
                   attachment.filename
                 }`;
-                downloadFile(attachment.url, `dist${newUrl}`);
+                downloadFile(attachment.url, `docs${newUrl}`);
                 alreadyDownloadedAttachments[attachment.url] = true;
                 attachment.url = newUrl;
               }
@@ -94,7 +94,7 @@ tableHasPublishedColumn(base, includePublished =>
 
           const pageTitle = row.fields[process.env.PAGE_TITLE_COLUMN];
 
-          const filepath = `dist/${slug}.html`;
+          const filepath = `docs/${slug}.html`;
           allRows[currentPage].push(formattedRow);
           recordsOnCurrentPage += 1;
           if (recordsOnCurrentPage >= 10) {
@@ -138,8 +138,8 @@ tableHasPublishedColumn(base, includePublished =>
           );
 
         allRows.forEach((row, idx) => {
-          const pageFilepath = `dist/page/${idx + 1}.html`;
-          const indexFilepath = `dist/index.html`;
+          const pageFilepath = `docs/page/${idx + 1}.html`;
+          const indexFilepath = `docs/index.html`;
           const pagination = {
             back: idx > 0 ? `/page/${idx}.html` : null,
             next: idx < allRows.length - 1 ? `/page/${idx + 2}.html` : null
@@ -155,19 +155,19 @@ tableHasPublishedColumn(base, includePublished =>
     )
 );
 
-fs.copyFile("public/default.css", "dist/main.css", () =>
+fs.copyFile("public/default.css", "docs/main.css", () =>
   fs.readFile("custom/styles.css", "utf-8", (err, data) => {
-    fs.writeFile("dist/main.css", data, { flag: "a" }, error => {
+    fs.writeFile("docs/main.css", data, { flag: "a" }, error => {
       if (error) {
-        console.error("Error writing custom CSS to dist/main.css");
+        console.error("Error writing custom CSS to docs/main.css");
       } else {
-        console.log("custom CSS appended to /dist/main.css");
+        console.log("custom CSS appended to /docs/main.css");
       }
     });
   })
 );
 
-fs.copyFile("custom/favicon.ico", "dist/favicon.ico", err => {
+fs.copyFile("custom/favicon.ico", "docs/favicon.ico", err => {
   if (err) {
     console.log("No favicon.ico file found");
   }
